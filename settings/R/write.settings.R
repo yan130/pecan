@@ -7,12 +7,15 @@
 ##' @author Ryan Kelly
 ##' @author Betsy Cowdery
 ##' @export write.settings
-
-
-write.settings <- function(settings, outputfile, outputdir=settings$outdir){
+write.settings <- function(settings, outputfile, outputdir=settings$outdir, removesecrets=FALSE){
   pecanfile <- file.path(outputdir, outputfile)
   if (file.exists(pecanfile)) {
     logger.warn(paste("File already exists [", pecanfile, "] file will be overwritten"))
   }
-  saveXML(listToXml(settings, "pecan"), file=pecanfile)
+
+  if (removesecrets) {
+    saveXML(listToXml(removeSecrets(settings), "pecan"), file=pecanfile)
+  } else {
+    saveXML(listToXml(settings, "pecan"), file=pecanfile)
+  }
 }
