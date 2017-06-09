@@ -75,3 +75,6 @@ shiny/BenchmarkReport/*
 .check/
 .test/
 .doc/
+# compilation files of C code
+*.o
+*.so
