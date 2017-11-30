@@ -77,6 +77,13 @@ get.trait.data.pft <- function(pft, modeltype, dbfiles, dbcon,
 
   # get the species, we need to check if anything changed
   species <- PEcAn.DB::query.pft_species(pft = pft$name, modeltype = modeltype, con = dbcon)
+  
+  ## for cultivars ... need a function called query.pft_cultivars just like above ^^
+  # if(length(species == 1))
+  # then query to see if pft has assoc. cultivars
+  # if so return cultivar string 'cultstr'
+  # cultstr <- PEcAn.utils::vecpaste(cultivars$id)
+
   spstr <- PEcAn.utils::vecpaste(species$id)
 
   # get the priors
@@ -85,7 +92,9 @@ get.trait.data.pft <- function(pft, modeltype, dbfiles, dbcon,
   traits <- rownames(prior.distns)
 
   # get the trait data (don't bother sampling derived traits until after update check)
-  trait.data.check <- PEcAn.DB::query.traits(spstr = spstr, priors = traits, con = dbcon, update.check.only = TRUE)
+  
+  # add ... to optionally take cultivars
+  trait.data.check <- PEcAn.DB::query.traits(spstr = spstr, priors = traits, con = dbcon, update.check.only = TRUE, ...)
   traits <- names(trait.data.check)
 
   # Set forceupdate FALSE if it's a string (backwards compatible with 'AUTO' flag used in the past)
@@ -93,7 +102,8 @@ get.trait.data.pft <- function(pft, modeltype, dbfiles, dbcon,
     forceupdate <- FALSE
   }
 
-  # check to see if we need to update
+  # check to see if we need to update 
+  ## need to add logic for cultivars; this can be done later ... just add a fail condition
   if (!forceupdate) {
     if (is.null(pft$posteriorid)) {
       pft$posteriorid <- db.query(
@@ -184,7 +194,7 @@ get.trait.data.pft <- function(pft, modeltype, dbfiles, dbcon,
   }
 
   # get the trait data (including sampling of derived traits, if any)
-  trait.data <- query.traits(spstr, traits, con = dbcon, update.check.only = FALSE)
+  trait.data <- query.traits(spstr, traits, con = dbcon, update.check.only = FALSE, ...)
   traits <- names(trait.data)
 
   # get list of existing files so they get ignored saving
