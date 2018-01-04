@@ -1,15 +1,26 @@
-A generic template for adding a new model to PEcAn
+A package to couple the AgMIP model execution utilities with the PEcAn model analysis utilities
 ==========================================================================
 
-Adding a new model to PEcAn in a few easy steps:
+Steps to add AgMIP to PEcAn:
 
 1. add modeltype to BETY
 2. add a model and PFT to BETY for use with modeltype
-3. implement 3 functions as described below
+3. implement 3 functions (described below and in documentation)
+  * `write.configs.AgMIP()`
+    * converts parameters & writes config / parameter files
+    * identifies where met is
+    * writes script to launch a single run
+  * `met2model.AgMIP()`
+  * `model2netcdf.AgMIP()`
+    * converts output to PEcAn standard (netcdf format)
+  * PEcAn --> AgMIP ICASA variable mappings are tracked in [this spreadsheet](https://docs.google.com/spreadsheets/d/1cXnf6Fku2NkfA3i-VZBXxvsdEvXoXeV4tC9eAZtiazY/edit#gid=0).
 4. Add tests to `tests/testthat`
 5. Update README, documentation
 6. execute pecan with new model
 
+More detailed instructions can be found in the documentation: https://pecanproject.github.io/pecan-documentation/master/adding-an-ecosystem-model.html
+
+PEcAn - AgMIP coupling discussions and plans are in [this google doc](https://docs.google.com/document/d/1bY_4espfIilvvA9wmDkA6LfVDtGm59sUbz23u8bmlZE/edit#)
 
 ### Three Functions
 
@@ -48,7 +59,6 @@ This file should contain basic background information about the model.
 At a minimum, this should include the scientific motivation and scope, 
 name(s) of maintainer(s), links to project homepage, and a list of a few
 key publications. 
-relevant publications.
 
 * `/tests/testthat/`
 
