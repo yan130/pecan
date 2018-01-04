@@ -1,11 +1,11 @@
-Package: PEcAn.ModelName
+Package: PEcAn.AgMIP
 Type: Package
-Title: PEcAn package for integration of the ModelName model
+Title: PEcAn package for integration of Agricultural Model Intercomparison (AgMIP) crop model workflow
 Version: 1.5.2
 Date: 2017-12-04
-Author: John Doe, Jane Doe
+Author: David LeBauer, Cheryl Porter, Jeff White
 Maintainer: John Doe <jdoe@illinois.edu>
-Description: This module provides functions to link the (ModelName) to PEcAn.
+Description: This module provides functions to link the AgMIP generic model templates from within PEcAn.
 Imports:
     PEcAn.logger,
     PEcAn.utils (>= 1.4.8)
