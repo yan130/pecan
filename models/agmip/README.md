@@ -11,6 +11,8 @@ Steps to add AgMIP to PEcAn:
     * identifies where met is
     * writes script to launch a single run
   * `met2model.AgMIP()`
+    * DALEC also use daily time steps, so [models/dalec/R/met2model.DALEC.R](https://github.com/PecanProject/pecan/blob/develop/) is a a good template to follow
+    * [`met2model.GDAY`](https://github.com/PecanProject/pecan/blob/develop/models/gday/R/met2model.GDAY.R) provides an example of a function that wraps a python function that actually does the conversion. 
   * `model2netcdf.AgMIP()`
     * converts output to PEcAn standard (netcdf format)
   * PEcAn --> AgMIP ICASA variable mappings are tracked in [this spreadsheet](https://docs.google.com/spreadsheets/d/1cXnf6Fku2NkfA3i-VZBXxvsdEvXoXeV4tC9eAZtiazY/edit#gid=0).
